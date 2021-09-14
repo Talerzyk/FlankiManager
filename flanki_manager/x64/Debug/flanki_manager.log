@@ -1,0 +1,17 @@
+﻿  Can.cpp
+  ComparatorClass.cpp
+  main.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(15): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(16): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(14): warning C4101: 'comp': unreferenced local variable
+  Match.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\match.cpp(54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\programming\c_cpp\flanki_manager\flanki_manager\match.cpp(55): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Menu.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\menu.cpp(27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Player.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\player.cpp(12): warning C4305: '=': truncation from 'double' to 'float'
+  Team.cpp
+  Generating Code...
+     Creating library D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.lib and object D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exp
+  flanki_manager.vcxproj -> D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exe

@@ -1,0 +1,17 @@
+﻿  Can.cpp
+  ComparatorClass.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\comparatorclass.cpp(26): warning C4018: '<': signed/unsigned mismatch
+d:\programming\c_cpp\flanki_manager\flanki_manager\comparatorclass.cpp(34): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(12): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(13): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(11): warning C4101: 'comp': unreferenced local variable
+  Match.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\match.cpp(14): warning C4018: '<': signed/unsigned mismatch
+  Player.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\player.cpp(12): warning C4305: '=': truncation from 'double' to 'float'
+  Team.cpp
+d:\programming\c_cpp\flanki_manager\flanki_manager\team.cpp(103): warning C4018: '<': signed/unsigned mismatch
+d:\programming\c_cpp\flanki_manager\flanki_manager\team.cpp(110): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+d:\programming\c_cpp\flanki_manager\flanki_manager\main.cpp(24): error C4700: uninitialized local variable 'c' used
