@@ -1,9 +1,25 @@
 #pragma once
 #include <string>
 
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/vector.hpp>
+#include <sstream>
+
 class Player
 {
 public:
+	template <typename Archieve>
+	void serialize(Archieve& ar, unsigned int version)
+	{
+		ar & firstName;
+		ar & lastName;
+		ar & accuracy;
+		ar & drinkSpeed;
+		ar & runSpeed;
+		ar & bottle;
+	}
+
 	Player();
 	Player(std::string fName, std::string lName, float acc, int ds, int rs);
 

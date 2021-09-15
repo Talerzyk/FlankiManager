@@ -8,6 +8,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include <sstream>
+#include <fstream>
 
 int main()
 {
@@ -18,7 +19,22 @@ int main()
 	Player p4, p5;
 
 	Team t1(p1, p2, p3, p4, p5);
+
+	std::ofstream outputStream;
+	outputStream.open("Team.dat");
+	boost::archive::binary_oarchive outputArchive(outputStream);
+	outputArchive << t1;
+	outputStream.close();
+
+
 	Team t2;
+	std::ifstream inputStream;
+	inputStream.open("Team.dat", std::ifstream::in);
+	boost::archive::binary_iarchive inputArchive(inputStream);
+	inputArchive >> t2;
+	std::cout << t2.Print(0) << std::endl;
+	inputStream.close();
+
 	//Can c;
 
 	//Match m1(t1, t2, c, 8);
