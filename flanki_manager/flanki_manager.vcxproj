@@ -26,6 +26,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SerializationClass.h" />
     <ClInclude Include="Team.h" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
     <ClCompile Include="Match.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SerializationClass.cpp" />
     <ClCompile Include="Team.cpp" />
   </ItemGroup>
   <ItemGroup>
