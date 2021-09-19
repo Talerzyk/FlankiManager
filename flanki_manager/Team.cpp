@@ -16,6 +16,8 @@ Team::Team()
 		Player p;
 		AddPlayer(p, 1);
 	}
+
+	name = "sample_team";
 }
 
 Team::Team(Player p1, Player p2, Player p3, Player p4, Player p5)
@@ -76,14 +78,13 @@ int Team::AddPlayer(Player p, int squad)
 int Team::RemovePlayer(Player p, int squad)
 {
 	int success = 0;
-	ComparatorClass comp;
 
 	switch (squad)
 	{
 	case 0: //base team
 		if (!base.empty())
 		{
-			std::vector<Player>::iterator i = base.begin() + comp.FindPlayer(p, *this, 0);
+			std::vector<Player>::iterator i = base.begin() + ComparatorClass::FindPlayer(p, *this, 0);
 			base.erase(i);
 			success = 1;
 		}
@@ -92,7 +93,7 @@ int Team::RemovePlayer(Player p, int squad)
 	case 1: //reserve team
 		if (reserve.empty())
 		{
-			std::vector<Player>::iterator i = reserve.begin() + comp.FindPlayer(p, *this, 1);
+			std::vector<Player>::iterator i = reserve.begin() + ComparatorClass::FindPlayer(p, *this, 1);
 			reserve.erase(i);
 			success = 1;
 		}
@@ -105,6 +106,8 @@ int Team::RemovePlayer(Player p, int squad)
 std::string Team::Print(int squad)
 {
 	std::string data;
+
+	data += name + "\n\n";
 
 	switch (squad)
 	{

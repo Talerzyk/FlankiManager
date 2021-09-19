@@ -7,7 +7,7 @@
 class Match
 {
 public:
-	Match(Team t1, Team t2, Can c, int dist);
+	Match(Team t1, int dist);
 
 	Team& GetA();
 	Team& GetB();

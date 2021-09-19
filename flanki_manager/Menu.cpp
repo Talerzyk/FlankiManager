@@ -3,12 +3,16 @@
 #else
 #include <unistd.h>
 #endif
-#include "Menu.h"
-#include "Match.h"
 #include <iostream>
 #include <stdlib.h>
 #include <conio.h>
 #include <string>
+#include <filesystem>
+#include "Menu.h"
+#include "Match.h"
+#include "main.h"
+#include "SerializationClass.h"
+
 
 const int KEY_ARROW_CHAR1 = 224;
 const int KEY_ARROW_UP = 72;
@@ -22,7 +26,7 @@ Menu::Menu()
 	choice = 0;
 }
 
-void Menu::Display(std::vector<std::string> menu, Match &m)
+void Menu::Display(std::vector<std::string> menu)
 {
 	int maxChoice = menu.size();
 
@@ -42,21 +46,55 @@ void Menu::Display(std::vector<std::string> menu, Match &m)
 			system("cls");
 			if (menu[choice] == "Back" || menu[choice] == "Exit")
 				return;
+			else if (menu[choice] == "New Game")
+			{
+				Team t;
+				myTeam = t;
+				std::cout << myTeam.Print(0) << std::endl;
+				_getch();
+				system("cls");
+				Display(menuPlay);
+			}
+			else if (menu[choice] == "Load Game")
+			{
+				std::string file;
+				for (const auto & entry : std::filesystem::directory_iterator("./Teams"))
+					std::cout << entry.path() << std::endl;
+
+				std::cout << "Which team do you want to load?:" << std::endl;
+				std::cin >> file;
+				SerializationClass::DeserializeTeam(myTeam, file);
+				system("cls");
+				std::cout << myTeam.Print(0) << std::endl;
+				_getch();
+				system("cls");
+				Display(menuPlay);
+			}
+			else if (menu[choice] == "Options")
+				Display(menuOptions);
 			else if (menu[choice] == "Play")
 			{
+				Match m(myTeam, 8);
 				m.Play();
-				_getch();
 			}
 			else if (menu[choice] == "Team")
-				Display(menuTeam, m);
-			else if (menu[choice] == "Options")
-				Display(menuOptions, m);
+				Display(menuTeam);
 			else if (menu[choice] == "Display Team")
 			{
-				std::cout << m.GetA().Print(0) << std::endl;
+				std::cout << myTeam.Print(0) << std::endl;
 				_getch();
 			}
-
+			else if (menu[choice] == "Manage Team")
+				Display(menuManageTeam);
+			else if (menu[choice] == "Save Team")
+				SerializationClass::SerializeTeam(myTeam);
+			else if (menu[choice] == "Change Name")
+			{
+				std::string newName;
+				std::cout << "Current name: " << myTeam.GetName() << std::endl << "Enter new name: ";
+				std::cin >> newName;
+				myTeam.SetName(newName);
+			}
 		}
 
 		if (choice == maxChoice)

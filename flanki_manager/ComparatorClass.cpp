@@ -2,7 +2,7 @@
 #include "Team.h"
 #include "Player.h"
 
-bool ComparatorClass::ComparePlayers(Player p1, Player p2)
+const bool ComparatorClass::ComparePlayers(Player p1, Player p2)
 {
 	if (p1.GetFirstName() != p2.GetFirstName())
 		return 0;
@@ -16,7 +16,7 @@ bool ComparatorClass::ComparePlayers(Player p1, Player p2)
 	return 1;
 }
 
-int ComparatorClass::FindPlayer(Player p, Team team, int squad)
+const int ComparatorClass::FindPlayer(Player p, Team team, int squad)
 {
 	int index = -1;
 

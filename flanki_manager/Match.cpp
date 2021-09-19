@@ -7,12 +7,13 @@
 #include <iostream>
 #include "Match.h"
 #include "ComparatorClass.h"
-#include "Player.h"
 #include "Team.h"
 #include "Can.h"
 
-Match::Match(Team t1, Team t2, Can c, int dist)
+Match::Match(Team t1, int dist)
 {
+	Team t2;
+	Can c;
 	a = t1;
 	b = t2;
 	can = c;
@@ -65,7 +66,7 @@ int Match::Play()
 		switch (teamPlaying)
 		{
 		case 0:
-			std::cout << std::endl << std::endl << "Team t" << teamPlaying + 1 << " plays" << std::endl;
+			std::cout << std::endl << std::endl << "Team " << a.GetName() << " plays" << std::endl;
 			bottleState = can.Hit(a.GetBase()[turnA].Throw()); //player throws and maybe hits can 
 			std::cout << "bottle state: " << bottleState << std::endl;
 			if (bottleState == 0)
@@ -99,7 +100,7 @@ int Match::Play()
 			break;
 
 		case 1:
-			std::cout << std::endl << std::endl << "Team t" << teamPlaying + 1 << " plays" << std::endl;
+			std::cout << std::endl << std::endl << "Team " << b.GetName() << " plays" << std::endl;
 			bottleState = can.Hit(b.GetBase()[turnA].Throw()); //player throws and maybe hits can
 			std::cout << "bottle state: " << bottleState << std::endl;
 			if (bottleState == 0)
