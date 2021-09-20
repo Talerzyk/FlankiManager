@@ -5,6 +5,7 @@
 #endif
 #include <random>
 #include <iostream>
+#include <conio.h>
 #include "Match.h"
 #include "ComparatorClass.h"
 #include "Team.h"
@@ -88,6 +89,12 @@ int Match::Play()
 					a.RemovePlayer(a.GetBase()[i], 0);
 					maxA--;
 					i--;
+					if (maxA == 0)
+					{
+						std::cout << "TEAM " << a.GetName() << " HAS WON" << std::endl;
+						_getch();
+						return 0;
+					}
 				}
 			}
 
@@ -122,6 +129,12 @@ int Match::Play()
 					b.RemovePlayer(b.GetBase()[i], 0);
 					maxB--;
 					i--;
+					if (maxB == 0)
+					{
+						std::cout << "TEAM " << b.GetName() << " HAS WON" << std::endl;
+						_getch();
+						return 0;
+					}
 				}
 			}
 

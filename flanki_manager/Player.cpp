@@ -110,7 +110,7 @@ int Player::Run(int distance, int bottle)
 std::string Player::Print()
 {
 	std::string data;
-	data = firstName + " " + lastName + " " + std::to_string(accuracy) + " bottle: " + std::to_string(bottle);
+	data = firstName + " " + lastName + " accuracy:" + std::to_string(accuracy) + " drink speed:" + std::to_string(drinkSpeed) + " run speed:" + std::to_string(runSpeed);
 
 	return data;
 }

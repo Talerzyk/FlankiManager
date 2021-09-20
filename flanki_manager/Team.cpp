@@ -107,11 +107,10 @@ std::string Team::Print(int squad)
 {
 	std::string data;
 
-	data += name + "\n\n";
-
 	switch (squad)
 	{
 	case 0: //base team
+		data += name + "\n\n";
 		for (int i = 0; i < base.size(); i++)
 		{
 			data += base[i].Print() + "\n";

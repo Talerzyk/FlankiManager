@@ -10,7 +10,7 @@ Team myTeam;
 int main()
 {
 	Menu m;
-	m.Display(m.menuMain);
+	m.Display(m.menuMain, "");
 
 	return 0;
 }

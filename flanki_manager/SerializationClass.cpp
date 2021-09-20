@@ -22,7 +22,7 @@ const int SerializationClass::SerializeTeam(Team t)
 const int SerializationClass::DeserializeTeam(Team &t, std::string f)
 {
 	std::ifstream inputStream;
-	inputStream.open("./Teams/" + f + ".bin", std::ifstream::in);
+	inputStream.open(f, std::ifstream::in);
 	boost::archive::binary_iarchive inputArchive(inputStream);
 	inputArchive >> t;
 	inputStream.close();
