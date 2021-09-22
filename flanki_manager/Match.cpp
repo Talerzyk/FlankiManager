@@ -20,13 +20,13 @@ Match::Match(Team t1, int dist)
 	can = c;
 	distance = dist;
 
-	for (int i = 0; i < a.GetBase().size(); i++)
+	for (int i = 0; i < a.GetTeam(0).size(); i++)
 	{
-		a.GetBase()[i].SetBottle(500); //everyone has full beer at the beginning of match
+		a.GetTeam(0)[i].SetBottle(500); //everyone has full beer at the beginning of match
 	}
-	for (int i = 0; i < b.GetBase().size(); i++)
+	for (int i = 0; i < b.GetTeam(0).size(); i++)
 	{
-		a.GetBase()[i].SetBottle(500); //everyone has full beer at the beginning of match
+		a.GetTeam(0)[i].SetBottle(500); //everyone has full beer at the beginning of match
 	}
 }
 
@@ -53,22 +53,22 @@ int Match::GetDistance()
 int Match::Play()
 {
 	int turnA = 0, turnB = 0;
-	int maxA = a.GetBase().size();
-	int maxB = b.GetBase().size();
+	int maxA = a.GetTeam(0).size();
+	int maxB = b.GetTeam(0).size();
 	int teamPlaying = CoinFlip(); //which team will play first. 0 - team a, 1 - team b
 	int bottleState;
 	int runTime;
 	int drank;
 
 
-	while (a.GetBase().size() != 0 && b.GetBase().size() != 0)
+	while (a.GetTeam(0).size() != 0 && b.GetTeam(0).size() != 0)
 	{
 		Sleep(1000);
 		switch (teamPlaying)
 		{
 		case 0:
 			std::cout << std::endl << std::endl << "Team " << a.GetName() << " plays" << std::endl;
-			bottleState = can.Hit(a.GetBase()[turnA].Throw()); //player throws and maybe hits can 
+			bottleState = can.Hit(a.GetTeam(0)[turnA].Throw()); //player throws and maybe hits can 
 			std::cout << "bottle state: " << bottleState << std::endl;
 			if (bottleState == 0)
 			{
@@ -76,17 +76,17 @@ int Match::Play()
 				break;
 			}
 
-			runTime = b.GetBase()[turnB].Run(distance, bottleState); //player runs and puts the can back
+			runTime = b.GetTeam(0)[turnB].Run(distance, bottleState); //player runs and puts the can back
 			std::cout << "run time: " << runTime << std::endl;
 			can.PutBack();
 
 			for (int i = 0; i < maxA; i++)
 			{
-				drank = a.GetBase()[i].Drink(runTime); //team drinks for the ammount of time that player ran
-				std::cout << a.GetBase()[i].GetFirstName() << " drank " << drank << "ml" << std::endl;
+				drank = a.GetTeam(0)[i].Drink(runTime); //team drinks for the ammount of time that player ran
+				std::cout << a.GetTeam(0)[i].GetFirstName() << " drank " << drank << "ml" << std::endl;
 				if (drank < 0)
 				{
-					a.RemovePlayer(a.GetBase()[i], 0);
+					a.RemovePlayer(a.GetTeam(0)[i], 0);
 					maxA--;
 					i--;
 					if (maxA == 0)
@@ -108,7 +108,7 @@ int Match::Play()
 
 		case 1:
 			std::cout << std::endl << std::endl << "Team " << b.GetName() << " plays" << std::endl;
-			bottleState = can.Hit(b.GetBase()[turnA].Throw()); //player throws and maybe hits can
+			bottleState = can.Hit(b.GetTeam(0)[turnA].Throw()); //player throws and maybe hits can
 			std::cout << "bottle state: " << bottleState << std::endl;
 			if (bottleState == 0)
 			{
@@ -116,17 +116,17 @@ int Match::Play()
 				break;
 			}
 
-			runTime = a.GetBase()[turnB].Run(distance, bottleState); //player runs and puts the can back
+			runTime = a.GetTeam(0)[turnB].Run(distance, bottleState); //player runs and puts the can back
 			std::cout << "run time: " << runTime << std::endl;
 			can.PutBack();
 
 			for (int i = 0; i < maxB; i++)
 			{
-				drank = b.GetBase()[i].Drink(runTime); //team drinks for the ammount of time that player ran
-				std::cout << b.GetBase()[i].GetFirstName() << " drank " << drank << "ml" << std::endl;
+				drank = b.GetTeam(0)[i].Drink(runTime); //team drinks for the ammount of time that player ran
+				std::cout << b.GetTeam(0)[i].GetFirstName() << " drank " << drank << "ml" << std::endl;
 				if (drank < 0)
 				{
-					b.RemovePlayer(b.GetBase()[i], 0);
+					b.RemovePlayer(b.GetTeam(0)[i], 0);
 					maxB--;
 					i--;
 					if (maxB == 0)

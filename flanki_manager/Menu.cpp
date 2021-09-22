@@ -24,6 +24,8 @@ const int KEY_ENTER = 13;
 Menu::Menu()
 {
 	choice = 0;
+	subChoice = 0;
+	squad = 0;
 }
 
 void Menu::Display(std::vector<std::string> menu, std::string message)
@@ -52,7 +54,10 @@ void Menu::Display(std::vector<std::string> menu, std::string message)
 		{
 			system("cls");
 			if (menu[choice] == "Back" || menu[choice] == "Exit")
+			{
+				choice = 0;
 				return;
+			}
 			else if (menu[choice] == "New Game")
 			{
 				Team t;
@@ -67,7 +72,7 @@ void Menu::Display(std::vector<std::string> menu, std::string message)
 				Display(teams, "Which team do you want to load?:\n");
 				Display(menuGame, "");
 			}
-			else if (teams == menu)
+			else if (menu == teams)
 			{
 				SerializationClass::DeserializeTeam(myTeam, menu[choice]);
 				system("cls");
@@ -102,7 +107,43 @@ void Menu::Display(std::vector<std::string> menu, std::string message)
 				myTeam.SetName(newName);
 			}
 			else if (menu[choice] == "Manage Players")
-				Display(menuPlayer, "");
+				Display(menuBR, "");
+			else if (menu[choice] == "Base")
+			{
+				squad = 0;
+				Display(myTeam.GetTeamMenu(0), "Base\n");
+			}
+			else if (menu[choice] == "Reserve")
+			{
+				squad = 1;
+				Display(myTeam.GetTeamMenu(1), "Reserve\n");
+			}
+			else if (menu == myTeam.GetTeamMenu(0) || menu == myTeam.GetTeamMenu(1))
+			{
+				subChoice = choice; //for picking player
+				Display(menuPlayer, menu[choice] + "\n\n");
+			}
+			else if (menu[choice] == "Remove From Team")
+			{
+				if (myTeam.RemovePlayer(myTeam.GetTeam(squad)[subChoice], squad) == 1)
+					std::cout << "Cannot remove player" << std::endl;
+				else
+					std::cout << "Player removed successfully" << std::endl;
+				_getch();
+			}
+			else if (menu[choice] == "Change Squad")
+			{
+				if (myTeam.GetTeam((squad + 1)%2).size() == myTeam.teamSize)
+				{
+					std::cout << "Cannot change squad" << std::endl;
+					_getch();
+				}
+				else
+				{
+					myTeam.AddPlayer(myTeam.GetTeam(squad)[subChoice], ((squad + 1) % 2));
+					myTeam.RemovePlayer(myTeam.GetTeam(squad)[subChoice], squad);
+				}
+			}
 		}
 
 		if (choice == maxChoice)

@@ -15,10 +15,13 @@ public:
 	const std::vector<std::string> menuPlay = { "Choose Opponent", "Random Opponent", "Back" };
 	const std::vector<std::string> menuOptions = { "Difficulty", "Sound", "Back" };
 	const std::vector<std::string> menuTeam = { "Display Team", "Manage Team", "Save Team", "Back" };
-	const std::vector<std::string> menuManageTeam = {"Change Name", "Manage Players", "Back"};
-	const std::vector<std::string> menuPlayer = {"Remove from team", "Change squad", "Back"};
+	const std::vector<std::string> menuManageTeam = { "Change Name", "Manage Players", "Back" };
+	const std::vector<std::string> menuPlayer = { "Remove From Team", "Change Squad", "Back" };
+	const std::vector<std::string> menuBR = { "Base", "Reserve", "Back" };
 	
 private:
 	int choice;
+	int subChoice;
+	int squad;
 };
 

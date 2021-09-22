@@ -40,89 +40,53 @@ std::string Team::GetName()
 }
 
 
-std::vector<Player>& Team::GetBase()
+std::vector<Player>& Team::GetTeam(int squad)
 {
-	return base;
+	return t[squad];
 }
 
-std::vector<Player>& Team::GetReserve()
+std::vector<std::string> Team::GetTeamMenu(int squad)
 {
-	return reserve;
+	std::vector<std::string> data;
+	
+	for (int i = 0; i < t[squad].size(); i++)
+		data.push_back(t[squad][i].Print());
+		
+	data.push_back("Back");
+	return data;
 }
 
 int Team::AddPlayer(Player p, int squad)
 {
-	int success = 0;
-	switch (squad)
+	if (t[squad].size() < teamSize)
 	{
-	case 0: //base team
-		if (base.size() < teamSize)
-		{
-			base.push_back(p);
-			success = 1;
-		}
-		break;
-
-	case 1: //reserve team
-		if (reserve.size() < teamSize)
-		{
-			reserve.push_back(p);
-			success = 1;
-		}
-		break;
+		t[squad].push_back(p);
+		return 0;
 	}
 
-	return success;
+	return 1;
 }
 
 int Team::RemovePlayer(Player p, int squad)
 {
-	int success = 0;
-
-	switch (squad)
+	if (!t[squad].empty())
 	{
-	case 0: //base team
-		if (!base.empty())
-		{
-			std::vector<Player>::iterator i = base.begin() + ComparatorClass::FindPlayer(p, *this, 0);
-			base.erase(i);
-			success = 1;
-		}
-		break;
-		
-	case 1: //reserve team
-		if (reserve.empty())
-		{
-			std::vector<Player>::iterator i = reserve.begin() + ComparatorClass::FindPlayer(p, *this, 1);
-			reserve.erase(i);
-			success = 1;
-		}
-		break;
+		std::vector<Player>::iterator i = t[squad].begin() + ComparatorClass::FindPlayer(p, *this, 0);
+		t[squad].erase(i);
+		return 0;
 	}
 
-	return success;
+	return 1;
 }
 
 std::string Team::Print(int squad)
 {
 	std::string data;
 
-	switch (squad)
+	data += "Team " + name + "\n\n";
+	for (int i = 0; i < t[squad].size(); i++)
 	{
-	case 0: //base team
-		data += name + "\n\n";
-		for (int i = 0; i < base.size(); i++)
-		{
-			data += base[i].Print() + "\n";
-		}
-		break;
-
-	case 1: //reserve team
-		for (int i = 0; i < reserve.size(); i++)
-		{
-			data += reserve[i].Print() + "\n";
-		}
-		break;
+		data += t[squad][i].Print() + "\n";
 	}
 
 	return data;

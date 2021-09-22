@@ -20,24 +20,9 @@ const int ComparatorClass::FindPlayer(Player p, Team team, int squad)
 {
 	int index = -1;
 
-	switch (squad)
+	for (int i = 0; i < team.GetTeam(squad).size(); i++)
 	{
-	case 0: //base team
-		for (int i = 0; i < team.GetBase().size(); i++)
-		{
-			if (ComparePlayers(team.GetBase()[i], p))
-				index = i;
-		}
-		break;
-
-	case 1: //reserve team
-		for (int i = 0; i < team.GetReserve().size(); i++)
-		{
-			if (ComparePlayers(team.GetReserve()[i], p))
-				index = i;
-		}
-		break;
+		if (ComparePlayers(team.GetTeam(squad)[i], p))
+			return i;
 	}
-
-	return index;
 }
