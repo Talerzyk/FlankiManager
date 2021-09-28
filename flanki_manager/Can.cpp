@@ -48,6 +48,7 @@ int Can::Hit(int thr)
 				state = 2; //can falls far
 			}
 		}
+		break;
 
 	case 2:
 		for (int i = 0; i < 15; i++)

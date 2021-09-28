@@ -1,11 +1,9 @@
-#include "Team.h"
 #include "ComparatorClass.h"
-#include "Match.h"
 #include "Menu.h"
 #include "SerializationClass.h"
 #include <iostream>
 
-Team myTeam;
+Career myCareer;
 
 int main()
 {
@@ -15,7 +13,9 @@ int main()
 	Player p3("maciej", "jasielewicz", 0.2, 25, 4);
 	Player p4("jakub", "antosiewicz", 0.8, 30, 3);
 	Player p5("krzysztof", "kocyan", 0.5, 15, 5);
+	Team t1(p1, p2, p3, p4, p5);
 	t1.SetName("dupa");
+	Team t2;
 	*/
 	
 	Menu m;

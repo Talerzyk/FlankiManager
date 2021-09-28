@@ -30,3 +30,26 @@ const int SerializationClass::DeserializeTeam(Team &t, std::string f)
 
 	return 0;
 }
+
+const int SerializationClass::SerializeCareer(Career c)
+{
+	if (c.GetName().empty())
+		return 1;
+	std::ofstream outputStream;
+	outputStream.open("./Careers/" + c.GetName() + ".bin");
+	boost::archive::binary_oarchive outputArchive(outputStream);
+	outputArchive << c;
+	outputStream.close();
+	return 0;
+}
+
+const int SerializationClass::DeserializeCareer(Career &c, std::string f)
+{
+	std::ifstream inputStream;
+	inputStream.open(f, std::ifstream::in);
+	boost::archive::binary_iarchive inputArchive(inputStream);
+	inputArchive >> c;
+	inputStream.close();
+
+	return 0;
+}

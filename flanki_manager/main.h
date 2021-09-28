@@ -1,4 +1,3 @@
 #pragma once
-#include "Match.h"
-
-extern Team myTeam;
+#include "Menu.h"
+extern Career myCareer;

@@ -7,20 +7,19 @@
 class Match
 {
 public:
-	Match(Team t1, int dist);
+	Match(Team t1, Team t2, int dist);
 
 	Team& GetA();
 	Team& GetB();
 	Can& GetCan();
 	int GetDistance();
 
-	int Play(); //the function of playing game, handle with care
+	int Play(); //the function of playing game, handle with care. Returns team that won (0 - player, 1 - AI)
 	int CoinFlip(); //coin flip for picking team. 0 - t1, 1 - t2
 	std::string Print();
 
 private:
-	Team b;
-	Team a;
+	Team teams[2]; //[0] - player's team, [1] - AI team
 	Can can;
 	int distance;
 };

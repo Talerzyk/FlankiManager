@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
-
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/vector.hpp>
+#include <boost/serialization/array.hpp>
 #include <sstream>
+#include <fstream>
+#include <iostream>
 
 class Player
 {

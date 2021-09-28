@@ -9,6 +9,7 @@
 #include <string>
 #include <filesystem>
 #include "Menu.h"
+#include "Career.h"
 #include "Match.h"
 #include "main.h"
 #include "SerializationClass.h"
@@ -28,10 +29,16 @@ Menu::Menu()
 	squad = 0;
 }
 
-void Menu::Display(std::vector<std::string> menu, std::string message)
+int Menu::Display(std::vector<std::string> menu, std::string message)
 {
+	static Team opponentTeam;
+	std::vector<std::string> careers;
+	for (const auto & entry : std::filesystem::directory_iterator("./Careers"))
+		careers.push_back(entry.path().string());
+	careers.push_back("Back");
+
 	std::vector<std::string> teams;
-	for (const auto & entry : std::filesystem::directory_iterator("./Teams"))
+	for (const auto& entry : std::filesystem::directory_iterator("./Teams"))
 		teams.push_back(entry.path().string());
 	teams.push_back("Back");
 
@@ -56,93 +63,133 @@ void Menu::Display(std::vector<std::string> menu, std::string message)
 			if (menu[choice] == "Back" || menu[choice] == "Exit")
 			{
 				choice = 0;
-				return;
+				return 0;
 			}
 			else if (menu[choice] == "New Game")
 			{
 				Team t;
-				myTeam = t;
-				std::cout << myTeam.Print(0) << std::endl;
+				myCareer.GetMyTeam() = t;
+				std::cout << myCareer.GetMyTeam().Print(0) << std::endl;
 				_getch();
 				system("cls");
 				Display(menuGame, "");
 			}
 			else if (menu[choice] == "Load Game")
 			{
-				Display(teams, "Which team do you want to load?:\n");
-				Display(menuGame, "");
+				Display(careers, "Which career do you want to load?:\n");
+				Display(menuGame, myCareer.GetName() + "\n\n");
 			}
-			else if (menu == teams)
+			else if (menu == careers)
 			{
-				SerializationClass::DeserializeTeam(myTeam, menu[choice]);
+				SerializationClass::DeserializeCareer(myCareer, menu[choice]);
 				system("cls");
-				std::cout << myTeam.Print(0) << std::endl;
+				std::cout << myCareer.GetMyTeam().Print(0) << std::endl;
 				_getch();
 				system("cls");
-				return;
+				return 0;
+			}
+			else if (menu[choice] == "Save Game")
+			{
+				if (SerializationClass::SerializeCareer(myCareer) == 0)
+				{
+					system("cls");
+					std::cout << "Game saved" << std::endl;
+				}
+				else
+					std::cout << "Game not saved" << std::endl;
+
+				_getch();
 			}
 			else if (menu[choice] == "Options")
 				Display(menuOptions, "");
 			else if (menu[choice] == "Play")
 			{
-				Match m(myTeam, 8);
-				m.Play();
+				if (Display(teams, "Select opponent team\n\n") == 0)
+				{
+					Match m(myCareer.GetMyTeam(), opponentTeam, 8);
+					myCareer.AddToHistory(m.Play(), opponentTeam);
+					_getch();
+				}
+			}
+			else if (menu == teams)
+			{
+				Team tempTeam;
+				SerializationClass::DeserializeTeam(tempTeam, menu[choice]);
+				if (tempTeam.Print(0) == myCareer.GetMyTeam().Print(0))
+				{
+					std::cout << "Cannot choose this team" << std::endl;
+					_getch();
+					return 1;
+				}
+				opponentTeam = tempTeam;
+				return 0;
 			}
 			else if (menu[choice] == "Team")
-				Display(menuTeam, "Team " + myTeam.GetName() + "\n\n");
+				Display(menuTeam, "Team " + myCareer.GetMyTeam().GetName() + "\n\n");
 			else if (menu[choice] == "Display Team")
 			{
-				std::cout << myTeam.Print(0) << std::endl << myTeam.Print(1);
+				std::cout << myCareer.GetMyTeam().Print(0) << std::endl << myCareer.GetMyTeam().Print(1);
 				_getch();
 			}
 			else if (menu[choice] == "Manage Team")
 				Display(menuManageTeam, "");
-			else if (menu[choice] == "Save Team")
-				SerializationClass::SerializeTeam(myTeam);
 			else if (menu[choice] == "Change Name")
 			{
 				std::string newName;
-				std::cout << "Current name: " << myTeam.GetName() << std::endl << "Enter new name: ";
+				std::cout << "Current name: " << myCareer.GetMyTeam().GetName() << std::endl << "Enter new name: ";
 				std::cin >> newName;
-				myTeam.SetName(newName);
+				myCareer.GetMyTeam().SetName(newName);
 			}
 			else if (menu[choice] == "Manage Players")
+			{
 				Display(menuBR, "");
+				return 0;
+			}
 			else if (menu[choice] == "Base")
 			{
-				squad = 0;
-				Display(myTeam.GetTeamMenu(0), "Base\n");
+				squad = 0; //for managing team
+				Display(myCareer.GetMyTeam().GetTeamMenu(0), "Base\n");
+				return 0;
 			}
 			else if (menu[choice] == "Reserve")
 			{
-				squad = 1;
-				Display(myTeam.GetTeamMenu(1), "Reserve\n");
+				squad = 1; //for managing team
+				Display(myCareer.GetMyTeam().GetTeamMenu(1), "Reserve\n");
+				return 0;
 			}
-			else if (menu == myTeam.GetTeamMenu(0) || menu == myTeam.GetTeamMenu(1))
+			else if (menu == myCareer.GetMyTeam().GetTeamMenu(0) || menu == myCareer.GetMyTeam().GetTeamMenu(1))
 			{
 				subChoice = choice; //for picking player
 				Display(menuPlayer, menu[choice] + "\n\n");
+				return 0;
 			}
 			else if (menu[choice] == "Remove From Team")
 			{
-				if (myTeam.RemovePlayer(myTeam.GetTeam(squad)[subChoice], squad) == 1)
+				if (myCareer.GetMyTeam().RemovePlayer(myCareer.GetMyTeam().GetTeam(squad)[subChoice], squad) == 1)
 					std::cout << "Cannot remove player" << std::endl;
 				else
 					std::cout << "Player removed successfully" << std::endl;
 				_getch();
+				return 0;
 			}
 			else if (menu[choice] == "Change Squad")
 			{
-				if (myTeam.GetTeam((squad + 1)%2).size() == myTeam.teamSize)
+				if (myCareer.GetMyTeam().GetTeam((squad + 1)%2).size() == myCareer.GetMyTeam().teamSize)
 				{
 					std::cout << "Cannot change squad" << std::endl;
 					_getch();
 				}
 				else
 				{
-					myTeam.AddPlayer(myTeam.GetTeam(squad)[subChoice], ((squad + 1) % 2));
-					myTeam.RemovePlayer(myTeam.GetTeam(squad)[subChoice], squad);
+					myCareer.GetMyTeam().AddPlayer(myCareer.GetMyTeam().GetTeam(squad)[subChoice], ((squad + 1) % 2));
+					myCareer.GetMyTeam().RemovePlayer(myCareer.GetMyTeam().GetTeam(squad)[subChoice], squad);
 				}
+				return 0;
+			}
+			else if (menu[choice] == "Show Match History")
+			{
+				std::cout << myCareer.PrintMatchHistory();
+				_getch();
 			}
 		}
 

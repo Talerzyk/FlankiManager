@@ -83,7 +83,11 @@ std::string Team::Print(int squad)
 {
 	std::string data;
 
-	data += "Team " + name + "\n\n";
+	if (squad == 0)
+		data += "Team " + name + "\n\nbase\n";
+	else
+		data += "reserve\n";
+
 	for (int i = 0; i < t[squad].size(); i++)
 	{
 		data += t[squad][i].Print() + "\n";

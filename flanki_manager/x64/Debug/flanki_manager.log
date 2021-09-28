@@ -1,3 +1,3 @@
-﻿  Menu.cpp
-d:\programming\c_cpp\flanki_manager\flanki_manager\menu.cpp(38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  Career.cpp
+     Creating library D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.lib and object D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exp
   flanki_manager.vcxproj -> D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exe
