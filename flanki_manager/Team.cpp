@@ -20,7 +20,7 @@ Team::Team()
 	name = "sample_team";
 }
 
-Team::Team(Player p1, Player p2, Player p3, Player p4, Player p5)
+Team::Team(const Player& p1, const Player& p2, const Player& p3, const Player& p4, const Player& p5)
 {
 	AddPlayer(p1, 0);
 	AddPlayer(p2, 0);
@@ -56,7 +56,7 @@ std::vector<std::string> Team::GetTeamMenu(int squad)
 	return data;
 }
 
-int Team::AddPlayer(Player p, int squad)
+int Team::AddPlayer(const Player &p, const int &squad)
 {
 	if (t[squad].size() < teamSize)
 	{
@@ -67,11 +67,11 @@ int Team::AddPlayer(Player p, int squad)
 	return 1;
 }
 
-int Team::RemovePlayer(Player p, int squad)
+int Team::RemovePlayer(const Player &p, const int &squad)
 {
 	if (!t[squad].empty())
 	{
-		std::vector<Player>::iterator i = t[squad].begin() + ComparatorClass::FindPlayer(p, *this, 0);
+		std::vector<Player>::iterator i = t[squad].begin() + ComparatorClass::FindPlayer(p, *this, squad);
 		t[squad].erase(i);
 		return 0;
 	}

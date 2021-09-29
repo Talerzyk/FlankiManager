@@ -23,20 +23,20 @@ public:
 	}
 
 	Player();
-	Player(std::string fName, std::string lName, float acc, int ds, int rs);
+	Player(const std::string &fName, const std::string &lName, const float &acc, const int &ds, const int &rs);
 
-	void SetFirstName(std::string name);
+	void SetFirstName(const std::string &name);
 	std::string GetFirstName();
-	void SetLastName(std::string name);
+	void SetLastName(const std::string &name);
 	std::string GetLastName();
-	void SetAccuracy(float acc);
+	void SetAccuracy(const float &acc);
 	float GetAccuracy();
-	void SetBottle(int bot);
+	void SetBottle(const int &bot);
 	int GetBottle();
 
 	int Throw(); //checks if player succseeded in throwing the stone. Return value: 0 - no success, 1 normal succes, 2 huge success
-	int Drink(int time); //returns number of mililiters drank in int time seconds by a player
-	int Run(int distance, int bottle); //returns number of seconds it took for a player to run, put the can back and return
+	int Drink(const int &time); //returns number of mililiters drank in int time seconds by a player
+	int Run(const int &distance, const int &bottle); //returns number of seconds it took for a player to run, put the can back and return
 
 	std::string Print();
 

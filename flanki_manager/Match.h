@@ -7,7 +7,7 @@
 class Match
 {
 public:
-	Match(Team t1, Team t2, int dist);
+	Match(const Team &t1, const Team &t2, const int &dist);
 
 	Team& GetA();
 	Team& GetB();

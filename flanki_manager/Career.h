@@ -20,13 +20,13 @@ public:
 
 	Career();
 
-	int AddToHistory(int result, Team opTeam);
+	int AddToHistory(const int &result, Team opTeam);
 
 	std::string GetName();
-	void SetName(std::string n);
+	void SetName(const std::string &n);
 	Team & GetMyTeam();
-	void SetMyTeam(Team t);
-	std::vector<std::vector<std::string>> GetMatchHistory();
+	void SetMyTeam(const Team &t);
+	std::vector<std::vector<std::string>> & GetMatchHistory();
 	std::string PrintMatchHistory();
 
 private:

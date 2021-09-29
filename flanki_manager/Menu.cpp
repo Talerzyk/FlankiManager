@@ -29,7 +29,7 @@ Menu::Menu()
 	squad = 0;
 }
 
-int Menu::Display(std::vector<std::string> menu, std::string message)
+int Menu::Display(const std::vector<std::string> &menu, const std::string &message)
 {
 	static Team opponentTeam;
 	std::vector<std::string> careers;

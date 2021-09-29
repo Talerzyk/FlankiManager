@@ -15,7 +15,7 @@ Player::Player()
 	runSpeed = 5;
 }
 
-Player::Player(std::string fName, std::string lName, float acc, int ds, int rs)
+Player::Player(const std::string& fName, const std::string& lName, const float& acc, const int& ds, const int& rs)
 {
 	firstName = fName;
 	lastName = lName;
@@ -26,7 +26,7 @@ Player::Player(std::string fName, std::string lName, float acc, int ds, int rs)
 }
 
 
-void Player::SetFirstName(std::string name)
+void Player::SetFirstName(const std::string &name)
 {
 	firstName = name;
 }
@@ -36,7 +36,7 @@ std::string Player::GetFirstName()
 	return firstName;
 }
 
-void Player::SetLastName(std::string name)
+void Player::SetLastName(const std::string &name)
 {
 	lastName = name;
 }
@@ -46,7 +46,7 @@ std::string Player::GetLastName()
 	return lastName;
 }
 
-void Player::SetAccuracy(float acc)
+void Player::SetAccuracy(const float &acc)
 {
 	accuracy = acc;
 }
@@ -56,7 +56,7 @@ float Player::GetAccuracy()
 	return accuracy;
 }
 
-void Player::SetBottle(int bot)
+void Player::SetBottle(const int &bot)
 {
 	bottle = bot;
 }
@@ -89,7 +89,7 @@ int Player::Throw()
 	return success;
 }
 
-int Player::Drink(int time)
+int Player::Drink(const int &time)
 {
 	int drank = drinkSpeed * time;
 	bottle = bottle - drank;
@@ -99,7 +99,7 @@ int Player::Drink(int time)
 	return drank;
 }
 
-int Player::Run(int distance, int bottle)
+int Player::Run(const int &distance, const int &bottle)
 {
 	int time = 0;
 	time = time + 2*(distance/runSpeed + 1) + bottle; //run back and forth + 1 second for bottle setting

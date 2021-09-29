@@ -11,7 +11,7 @@
 #include "Team.h"
 #include "Can.h"
 
-Match::Match(Team t1, Team t2, int dist)
+Match::Match(const Team &t1, const Team &t2, const int &dist)
 {
 	Can c;
 	teams[0] = t1; //player's team

@@ -19,10 +19,10 @@ public:
 	}
 
 	Team();
-	Team(Player p1, Player p2, Player p3, Player p4, Player p5);
+	Team(const Player &p1, const Player &p2, const Player &p3, const Player &p4, const Player &p5);
 
-	int AddPlayer(Player p, int squad); //adds player to the chosen team. Outputs: 1 - team is full, 0 - success. Squad: 0 - base, 1 - reserve
-	int RemovePlayer(Player p, int squad); //removes player from the chosen team. Outputs: 1 - team is empty, 0 - success. Squad: 0 - base, 1 - reserve
+	int AddPlayer(const Player &p, const int &squad); //adds player to the chosen team. Outputs: 1 - team is full, 0 - success. Squad: 0 - base, 1 - reserve
+	int RemovePlayer(const Player &p, const int &squad); //removes player from the chosen team. Outputs: 1 - team is empty, 0 - success. Squad: 0 - base, 1 - reserve
 
 	void SetName(std::string n);
 	std::string GetName();

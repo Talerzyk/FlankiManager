@@ -1,3 +1,15 @@
 ﻿  Career.cpp
+  ComparatorClass.cpp
+  main.cpp
+  Match.cpp
+D:\Programming\C_Cpp\flanki_manager\flanki_manager\Match.cpp(55,52): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Programming\C_Cpp\flanki_manager\flanki_manager\Match.cpp(55,90): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Menu.cpp
+D:\Programming\C_Cpp\flanki_manager\flanki_manager\Menu.cpp(45,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  SerializationClass.cpp
+  Team.cpp
+  Generating Code...
+D:\Programming\C_Cpp\flanki_manager\flanki_manager\Match.cpp(101): warning C4715: 'Match::Play': not all control paths return a value
+D:\Programming\C_Cpp\flanki_manager\flanki_manager\ComparatorClass.cpp(28): warning C4715: 'ComparatorClass::FindPlayer': not all control paths return a value
      Creating library D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.lib and object D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exp
   flanki_manager.vcxproj -> D:\Programming\C_Cpp\flanki_manager\x64\Debug\flanki_manager.exe

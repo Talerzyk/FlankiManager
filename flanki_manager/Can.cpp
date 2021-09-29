@@ -6,7 +6,7 @@ Can::Can()
 	state = 0;
 }
 
-int Can::Hit(int thr)
+int Can::Hit(const int &thr)
 {
 	std::random_device rd; //random number from hardware
 	std::mt19937 mt(rd()); //seed rd
