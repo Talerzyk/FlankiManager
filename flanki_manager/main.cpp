@@ -3,7 +3,43 @@
 #include "SerializationClass.h"
 #include <iostream>
 
+#include <chrono>
+#include <thread>
+#include <conio.h>
+#include <mutex>
+#include <condition_variable>
+
+std::mutex m;
+std::condition_variable cv;
+unsigned char ch1, ch2;
+
+
 Career myCareer;
+
+auto watchdog = [](std::stop_token t)
+{
+	
+	while (!t.stop_requested())
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::unique_lock<std::mutex> lk(m);
+		ch1 = _getch();
+		ch2 = _getch();
+		//std::cout << std::this_thread::get_id() << " " << (int)ch1 << " " << (int)ch2 << std::endl;
+		cv.notify_one();
+	}
+};
+
+auto print = [](std::stop_token t)
+{
+	while (!t.stop_requested())
+	{
+		std::unique_lock<std::mutex> lk(m);
+		cv.wait(lk);
+		std::cout << std::this_thread::get_id() << " " << (int)ch1 << " " << (int)ch2 << std::endl;
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+};
 
 int main()
 {
@@ -17,9 +53,16 @@ int main()
 	t1.SetName("dupa");
 	Team t2;
 	*/
-	
-	Menu m;
-	m.Display(m.menuMain, "");
+
+	//Menu m;
+	//m.Display(m.menuMain, "");
+
+	std::jthread watchd(watchdog);
+	std::jthread prnt(print);
+
+	std::this_thread::sleep_for(std::chrono::seconds(10));
+	prnt.request_stop();
+	watchd.request_stop();
 
 	return 0;
 }
